@@ -1,0 +1,42 @@
+{
+  "name": "logit",
+  "description": "Dirty logging with class",
+  "keywords": [
+    "requests",
+    "http",
+    "json",
+    "client"
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/mycozycloud/console-logger/blob/master/LICENSE"
+    }
+  ],
+  "version": "0.4.4",
+  "homepage": "https://github.com/mycozycloud/console-logger/",
+  "bugs": {
+    "url": "https://github.com/mycozycloud/console-logger/issues"
+  },
+  "author": "Cozy Cloud <contact@cozycloud.cc> (http://cozycloud.cc)",
+  "contributors": [
+    "Frank Rousseau"
+  ],
+  "engines": {
+    "node": "*"
+  },
+  "main": "./main.js",
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "scripts": {
+    "prepublish": "cake build",
+    "test": "cake tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mycozycloud/console-logger.git"
+  },
+  "optionalDependencies": {}
+}
