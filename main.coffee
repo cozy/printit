@@ -52,5 +52,5 @@ class Logger
     raw: (text) ->
         console.log text
 
-    break: (text) ->
+    lineBreak: (text) ->
         @raw Array(80).join("*")
