@@ -1,5 +1,5 @@
 {
-  "name": "logit",
+  "name": "printit",
   "description": "Dirty logging with class",
   "keywords": [
     "requests",
@@ -10,13 +10,13 @@
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/frankrousseau/console-logger/blob/master/LICENSE"
+      "url": "https://github.com/frankrousseau/printit/blob/master/LICENSE"
     }
   ],
   "version": "0.1.1",
-  "homepage": "https://github.com/frankrousseau/console-logger/",
+  "homepage": "https://github.com/frankrousseau/printit/",
   "bugs": {
-    "url": "https://github.com/frankrousseau/console-logger/issues"
+    "url": "https://github.com/frankrousseau/printit/issues"
   },
   "author": "Cozy Cloud <contact@cozycloud.cc> (http://cozycloud.cc)",
   "contributors": [
@@ -34,7 +34,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/frankrousseau/console-logger.git"
+    "url": "git://github.com/frankrousseau/printit.git"
   },
   "optionalDependencies": {}
 }
