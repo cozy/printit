@@ -13,8 +13,8 @@ colors =
 levelColors =
     error: colors.red
     debug: colors.green
-    'warn': colors.yellow
-    'info': colors.blue
+    warn: colors.yellow
+    info: colors.blue
 
 class Logger
 
@@ -27,6 +27,7 @@ class Logger
         "#{color[0]}#{text}#{color[1]}"
 
     format: (level, text) ->
+        text = JSON.stringify text if text instanceof Object
         text = "#{@options.prefix} | #{text}" if @options.prefix?
         if process.env.NODE_ENV isnt 'production'
             level = @colorify level, levelColors[level]
