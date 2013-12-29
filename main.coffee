@@ -13,8 +13,8 @@ colors =
 levelColors =
     error: colors.red
     debug: colors.green
-    'warn ': colors.yellow
-    'info ': colors.blue
+    'warn': colors.yellow
+    'info': colors.blue
 
 class Logger
 
@@ -38,10 +38,10 @@ class Logger
         text
 
     info: (text) ->
-        console.info @format 'info ', text if process.env.NODE_ENV isnt 'test'
+        console.info @format 'info', text if process.env.NODE_ENV isnt 'test'
 
     warn: (text) ->
-        console.warn @format 'warn ', text if process.env.NODE_ENV isnt 'test'
+        console.warn @format 'warn', text if process.env.NODE_ENV isnt 'test'
 
     error: (text) ->
         console.error @format 'error', text if process.env.NODE_ENV isnt 'test'
