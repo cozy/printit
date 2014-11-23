@@ -48,7 +48,7 @@ class Logger
         console.error @format 'error', text if process.env.NODE_ENV isnt 'test'
 
     debug: (text) ->
-        console.info @format 'debug', text if process.env.NODE_ENV isnt 'test'
+        console.info @format 'debug', text if process.env.DEBUG
 
     raw: (text) ->
         console.log text
