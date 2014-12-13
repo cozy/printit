@@ -29,10 +29,17 @@ class Logger
     format: (level, text) ->
         text = JSON.stringify text if text instanceof Object
         text = "#{@options.prefix} | #{text}" if @options.prefix?
+        
+        if level is 'info' or level is 'warn'
+             padding = ' '
+        else padding = ''
+        
         if process.env.NODE_ENV isnt 'production'
             level = @colorify level, levelColors[level]
 
-        text = "#{level} - #{text}" if level
+        if level
+            if level
+        text = "#{level}#{padding} - #{text}" if level
         if @options.date
             date = new Date().format @options.dateFormat
             text = "[#{date}] #{text}"
