@@ -11,7 +11,8 @@ logger with class!
 
 The way printit displays things is changed via environment variable:
 
-* When NODE_ENV is 'production', it doesn't display colors ().
+* Debug messages are not displayed.
+* When NODE_ENV is 'production', it doesn't display colors (it's better when you cat/tail a log file).
 * When NODE_ENV is 'test', it doesn't display logs (logs make mocha output 
   looks less messy).
 * When DEBUG is 'true', it displays the debug messages.
