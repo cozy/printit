@@ -17,6 +17,8 @@ The way printit displays things is changed via environment variable:
   looks less messy).
 * When DEBUG is 'true', it displays the debug messages.
 
+### Examples
+
 ```javascript
 var printit = require('printit');
 
