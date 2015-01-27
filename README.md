@@ -7,6 +7,15 @@ At last, you don't care much about log level, the classical
 info/debug/warn/error is enough for you. Say welcome to printit the dirty
 logger with class!
 
+### Display rules
+
+The way printit displays things is changed via environment variable:
+
+* When NODE_ENV is 'production', it doesn't display colors ().
+* When NODE_ENV is 'test', it doesn't display logs (logs make mocha output 
+  looks less messy).
+* When DEBUG is 'true', it displays the debug messages.
+
 ```javascript
 var printit = require('printit');
 
