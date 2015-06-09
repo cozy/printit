@@ -52,6 +52,18 @@ class Logger
         console.warn @format 'warn', texts if process.env.NODE_ENV isnt 'test'
 
     error: (texts...) ->
+        stacklist = (new Error()).stack.split('\n').slice(2);
+        stackReg = /at\s+(.*)\s+\((.*):(\d*):(\d*)\)/gi;
+        stackReg2 = /at\s+()(.*):(\d*):(\d*)/gi;
+
+        s = stacklist[0]
+        sp = stackReg.exec(s) or stackReg2.exec(s)
+
+        filePath = sp[2].substr(process.cwd().length)
+        line = sp[3]
+        errDetails = ".#{filePath}:#{line} |"
+        texts.unshift(errDetails)
+
         console.error @format 'error', texts if process.env.NODE_ENV isnt 'test'
 
     debug: (texts...) ->
