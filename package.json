@@ -13,7 +13,7 @@
       "url": "https://github.com/frankrousseau/printit/blob/master/LICENSE"
     }
   ],
-  "version": "0.1.6",
+  "version": "0.1.7",
   "homepage": "https://github.com/frankrousseau/printit/",
   "bugs": {
     "url": "https://github.com/frankrousseau/printit/issues"
@@ -29,8 +29,9 @@
   "dependencies": {},
   "devDependencies": {},
   "scripts": {
-    "prepublish": "cake build",
-    "test": "cake tests"
+    "prepublish": "coffee -cb main.coffee",
+    "build": "coffee -cb main.coffee",
+    "test": "DEBUG=true node tests.js"
   },
   "repository": {
     "type": "git",
