@@ -26,8 +26,28 @@ class Logger
     colorify: (text, color) ->
         "#{color[0]}#{text}#{color[1]}"
 
-    format: (level, text) ->
-        text = JSON.stringify text if text instanceof Object
+    stringify: (text) ->
+        if text instanceof Object
+            text = JSON.stringify text
+        return text
+
+    getFileAndLine: ->
+        stacklist = (new Error()).stack.split('\n').slice(3);
+        nodeReg = /at\s+(.*)\s+\((.*):(\d*):(\d*)\)/gi;
+        browserReg = /at\s+()(.*):(\d*):(\d*)/gi;
+
+        s = stacklist[0]
+        sp = nodeReg.exec(s) or browserReg2.exec(s)
+
+        filePath = sp[2].substr(process.cwd().length)
+        line = sp[3]
+        return ".#{filePath}:#{line} |"
+
+    format: (level, texts) ->
+        texts.unshift(@getFileAndLine()) if process.env.DEBUG
+
+        text = (@stringify text for text in texts).join(" ")
+
         text = "#{@options.prefix} | #{text}" if @options.prefix?
 
         if process.env.NODE_ENV isnt 'production'
@@ -39,20 +59,20 @@ class Logger
             text = "[#{date}] #{text}"
         text
 
-    info: (text) ->
-        console.info @format 'info', text if process.env.NODE_ENV isnt 'test'
+    info: (texts...) ->
+        console.info @format 'info', texts if process.env.NODE_ENV isnt 'test'
 
-    warn: (text) ->
-        console.warn @format 'warn', text if process.env.NODE_ENV isnt 'test'
+    warn: (texts...) ->
+        console.warn @format 'warn', texts if process.env.NODE_ENV isnt 'test'
 
-    error: (text) ->
-        console.error @format 'error', text if process.env.NODE_ENV isnt 'test'
+    error: (texts...) ->
+        console.error @format 'error', texts if process.env.NODE_ENV isnt 'test'
 
-    debug: (text) ->
-        console.info @format 'debug', text if process.env.DEBUG
+    debug: (texts...) ->
+        console.info @format 'debug', texts if process.env.DEBUG
 
-    raw: (text) ->
-        console.log text
+    raw: (texts...) ->
+        console.log.apply console, texts
 
     lineBreak: (text) ->
         @raw Array(80).join("*")
