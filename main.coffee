@@ -36,11 +36,11 @@ class Logger
         nodeReg = /at\s+(.*)\s+\((.*):(\d*):(\d*)\)/gi;
         browserReg = /at\s+()(.*):(\d*):(\d*)/gi;
 
-        s = stacklist[0]
-        sp = nodeReg.exec(s) or browserReg2.exec(s)
+        firstLineStack = stacklist[0]
+        fileAndLineInfos = nodeReg.exec(firstLineStack) or browserReg2.exec(firstLineStack)
 
-        filePath = sp[2].substr(process.cwd().length)
-        line = sp[3]
+        filePath = fileAndLineInfos[2].substr(process.cwd().length)
+        line = fileAndLineInfos[3]
         return ".#{filePath}:#{line} |"
 
     format: (level, texts) ->
