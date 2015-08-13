@@ -31,7 +31,21 @@ class Logger
             text = JSON.stringify text
         return text
 
+    getFileAndLine: ->
+        stacklist = (new Error()).stack.split('\n').slice(3);
+        nodeReg = /at\s+(.*)\s+\((.*):(\d*):(\d*)\)/gi;
+        browserReg = /at\s+()(.*):(\d*):(\d*)/gi;
+
+        firstLineStack = stacklist[0]
+        fileAndLineInfos = nodeReg.exec(firstLineStack) or browserReg2.exec(firstLineStack)
+
+        filePath = fileAndLineInfos[2].substr(process.cwd().length)
+        line = fileAndLineInfos[3]
+        return ".#{filePath}:#{line} |"
+
     format: (level, texts) ->
+        texts.unshift(@getFileAndLine()) if process.env.DEBUG
+
         text = (@stringify text for text in texts).join(" ")
 
         text = "#{@options.prefix} | #{text}" if @options.prefix?
@@ -52,18 +66,6 @@ class Logger
         console.warn @format 'warn', texts if process.env.NODE_ENV isnt 'test'
 
     error: (texts...) ->
-        stacklist = (new Error()).stack.split('\n').slice(2);
-        stackReg = /at\s+(.*)\s+\((.*):(\d*):(\d*)\)/gi;
-        stackReg2 = /at\s+()(.*):(\d*):(\d*)/gi;
-
-        s = stacklist[0]
-        sp = stackReg.exec(s) or stackReg2.exec(s)
-
-        filePath = sp[2].substr(process.cwd().length)
-        line = sp[3]
-        errDetails = ".#{filePath}:#{line} |"
-        texts.unshift(errDetails)
-
         console.error @format 'error', texts if process.env.NODE_ENV isnt 'test'
 
     debug: (texts...) ->
