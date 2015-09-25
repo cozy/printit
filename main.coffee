@@ -32,9 +32,9 @@ class Logger
         return text
 
     getFileAndLine: ->
-        stacklist = (new Error()).stack.split('\n').slice(3);
-        nodeReg = /at\s+(.*)\s+\((.*):(\d*):(\d*)\)/gi;
-        browserReg = /at\s+()(.*):(\d*):(\d*)/gi;
+        stacklist = (new Error()).stack.split('\n').slice(3)
+        nodeReg = /at\s+(.*)\s+\((.*):(\d*):(\d*)\)/gi
+        browserReg = /at\s+()(.*):(\d*):(\d*)/gi
 
         firstLineStack = stacklist[0]
         fileAndLineInfos = nodeReg.exec(firstLineStack) or browserReg2.exec(firstLineStack)
@@ -60,16 +60,20 @@ class Logger
         text
 
     info: (texts...) ->
-        console.info @format 'info', texts if process.env.NODE_ENV isnt 'test'
+        if process.env.DEBUG or process.env.NODE_ENV isnt 'test'
+            console.info @format 'info', texts
 
     warn: (texts...) ->
-        console.warn @format 'warn', texts if process.env.NODE_ENV isnt 'test'
+        if process.env.DEBUG or process.env.NODE_ENV isnt 'test'
+            console.warn @format 'warn', texts
 
     error: (texts...) ->
-        console.error @format 'error', texts if process.env.NODE_ENV isnt 'test'
+        if process.env.DEBUG or process.env.NODE_ENV isnt 'test'
+            console.error @format 'error', texts
 
     debug: (texts...) ->
-        console.info @format 'debug', texts if process.env.DEBUG
+        if process.env.DEBUG
+            console.info @format 'debug', texts
 
     raw: (texts...) ->
         console.log.apply console, texts
