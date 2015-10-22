@@ -37,7 +37,7 @@ class Logger
         browserReg = /at\s+()(.*):(\d*):(\d*)/gi
 
         firstLineStack = stacklist[0]
-        fileAndLineInfos = nodeReg.exec(firstLineStack) or browserReg2.exec(firstLineStack)
+        fileAndLineInfos = nodeReg.exec(firstLineStack) or browserReg.exec(firstLineStack)
 
         filePath = fileAndLineInfos[2].substr(process.cwd().length)
         line = fileAndLineInfos[3]
