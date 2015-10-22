@@ -32,7 +32,7 @@ class Logger
         return text
 
     getFileAndLine: ->
-        stacklist = (new Error()).stack.split('\n').slice(3)
+        stacklist = (new Error()).stack.split('\n').slice(4)
         nodeReg = /at\s+(.*)\s+\((.*):(\d*):(\d*)\)/gi
         browserReg = /at\s+()(.*):(\d*):(\d*)/gi
 
