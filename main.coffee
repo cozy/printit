@@ -67,10 +67,12 @@ class Logger
 
     warn: (texts...) ->
         if process.env.NODE_ENV isnt 'test'
+            console.info @format 'warn', texts
             console.warn @format 'warn', texts
 
     error: (texts...) ->
         if process.env.NODE_ENV isnt 'test'
+            console.info @format 'error', texts
             console.error @format 'error', texts
 
     debug: (texts...) ->
@@ -82,3 +84,4 @@ class Logger
 
     lineBreak: (text) ->
         @raw Array(80).join("*")
+
