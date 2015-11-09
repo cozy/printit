@@ -62,16 +62,16 @@ class Logger
         text
 
     info: (texts...) ->
-        if process.env.NODE_ENV isnt 'test'
+        if process.env.DEBUG or process.env.NODE_ENV isnt 'test'
             console.info @format 'info', texts
 
     warn: (texts...) ->
-        if process.env.NODE_ENV isnt 'test'
+        if process.env.DEBUG or pprocess.env.NODE_ENV isnt 'test'
             console.info @format 'warn', texts
             console.warn @format 'warn', texts
 
     error: (texts...) ->
-        if process.env.NODE_ENV isnt 'test'
+        if process.env.DEBUG or process.env.NODE_ENV isnt 'test'
             console.info @format 'error', texts
             console.error @format 'error', texts
 
