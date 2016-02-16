@@ -2,3 +2,5 @@
 todo
 .git*
 .project
+tests.js
+.travis.yml
