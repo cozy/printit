@@ -27,7 +27,7 @@ class Logger
         "#{color[0]}#{text}#{color[1]}"
 
     stringify: (text) ->
-        if text.stack and text instanceof Error
+        if text instanceof Error and text.stack
             text = text.stack
         else if text instanceof Object
             text = JSON.stringify text
