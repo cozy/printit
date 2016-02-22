@@ -40,7 +40,7 @@ Logger = (function() {
   };
 
   Logger.prototype.stringify = function(text) {
-    if (text.stack && text instanceof Error) {
+    if (text instanceof Error && text.stack) {
       text = text.stack;
     } else if (text instanceof Object) {
       text = JSON.stringify(text);
