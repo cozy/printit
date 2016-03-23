@@ -16,15 +16,19 @@ levelColors =
     warn: colors.yellow
     info: colors.blue
 
+
 class Logger
+
 
     constructor: (@options) ->
         @options ?= {}
         if @options.date and not @options.dateFormat?
             @options.dateFormat = 'YYYY-MM-DD hh:mm:ss:S'
 
+
     colorify: (text, color) ->
         "#{color[0]}#{text}#{color[1]}"
+
 
     stringify: (text) ->
         if text instanceof Error and text.stack
@@ -32,6 +36,7 @@ class Logger
         else if text instanceof Object
             text = JSON.stringify text
         return text
+
 
     getFileAndLine: ->
         stacklist = (new Error()).stack.split('\n').slice(4)
@@ -61,26 +66,32 @@ class Logger
             text = "[#{date}] #{text}"
         text
 
+
     info: (texts...) ->
         if process.env.DEBUG or process.env.NODE_ENV isnt 'test'
             console.info @format 'info', texts
+
 
     warn: (texts...) ->
         if process.env.DEBUG or process.env.NODE_ENV isnt 'test'
             console.info @format 'warn', texts
             console.warn @format 'warn', texts
 
+
     error: (texts...) ->
         if process.env.DEBUG or process.env.NODE_ENV isnt 'test'
             console.info @format 'error', texts
             console.error @format 'error', texts
 
+
     debug: (texts...) ->
         if process.env.DEBUG
             console.info @format 'debug', texts
 
+
     raw: (texts...) ->
         console.log.apply console, texts
+
 
     lineBreak: (text) ->
         @raw Array(80).join("*")
