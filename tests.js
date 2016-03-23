@@ -32,6 +32,7 @@ var tab = ["el1", "el2"];
 logger.info(tab);
 
 logger.info('arg1', 'arg2');
+logger.lineBreak();
 
 fs = require('fs');
 
