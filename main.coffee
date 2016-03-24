@@ -44,11 +44,13 @@ class Logger
         browserReg = /at\s+()(.*):(\d*):(\d*)/gi
 
         firstLineStack = stacklist[0]
-        fileAndLineInfos = nodeReg.exec(firstLineStack) or browserReg.exec(firstLineStack)
+        fileAndLineInfos = \
+            nodeReg.exec(firstLineStack) or browserReg.exec(firstLineStack)
 
         filePath = fileAndLineInfos[2].substr(process.cwd().length)
         line = fileAndLineInfos[3]
         return ".#{filePath}:#{line} |"
+
 
     format: (level, texts) ->
         texts.unshift(@getFileAndLine()) if process.env.DEBUG
@@ -74,13 +76,16 @@ class Logger
 
     warn: (texts...) ->
         if process.env.DEBUG or process.env.NODE_ENV isnt 'test'
-            console.info @format 'warn', texts
+            if @options.duplicateStdout
+                console.info @format 'warn', texts
             console.warn @format 'warn', texts
 
 
     error: (texts...) ->
         if process.env.DEBUG or process.env.NODE_ENV isnt 'test'
-            console.info @format 'error', texts
+            console.log(@options)
+            if @options.duplicateStdout
+                console.info @format 'error', texts
             console.error @format 'error', texts
 
 
