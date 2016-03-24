@@ -27,11 +27,15 @@
   },
   "main": "./main.js",
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "intercept-stdout": "0.1.2",
+    "mocha": "2.4.5",
+    "should": "8.3.0"
+  },
   "scripts": {
     "prepublish": "coffee -cb main.coffee",
     "build": "coffee -cb main.coffee",
-    "test": "DEBUG=true node tests.js"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",

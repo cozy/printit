@@ -16,15 +16,19 @@ levelColors =
     warn: colors.yellow
     info: colors.blue
 
+
 class Logger
+
 
     constructor: (@options) ->
         @options ?= {}
         if @options.date and not @options.dateFormat?
             @options.dateFormat = 'YYYY-MM-DD hh:mm:ss:S'
 
+
     colorify: (text, color) ->
         "#{color[0]}#{text}#{color[1]}"
+
 
     stringify: (text) ->
         if text instanceof Error and text.stack
@@ -33,17 +37,20 @@ class Logger
             text = JSON.stringify text
         return text
 
+
     getFileAndLine: ->
         stacklist = (new Error()).stack.split('\n').slice(4)
         nodeReg = /at\s+(.*)\s+\((.*):(\d*):(\d*)\)/gi
         browserReg = /at\s+()(.*):(\d*):(\d*)/gi
 
         firstLineStack = stacklist[0]
-        fileAndLineInfos = nodeReg.exec(firstLineStack) or browserReg.exec(firstLineStack)
+        fileAndLineInfos = \
+            nodeReg.exec(firstLineStack) or browserReg.exec(firstLineStack)
 
         filePath = fileAndLineInfos[2].substr(process.cwd().length)
         line = fileAndLineInfos[3]
         return ".#{filePath}:#{line} |"
+
 
     format: (level, texts) ->
         texts.unshift(@getFileAndLine()) if process.env.DEBUG
@@ -61,26 +68,34 @@ class Logger
             text = "[#{date}] #{text}"
         text
 
+
     info: (texts...) ->
         if process.env.DEBUG or process.env.NODE_ENV isnt 'test'
             console.info @format 'info', texts
 
+
     warn: (texts...) ->
         if process.env.DEBUG or process.env.NODE_ENV isnt 'test'
-            console.info @format 'warn', texts
+            if @options.duplicateToStdout
+                console.info @format 'warn', texts
             console.warn @format 'warn', texts
+
 
     error: (texts...) ->
         if process.env.DEBUG or process.env.NODE_ENV isnt 'test'
-            console.info @format 'error', texts
+            if @options.duplicateToStdout
+                console.info @format 'error', texts
             console.error @format 'error', texts
+
 
     debug: (texts...) ->
         if process.env.DEBUG
             console.info @format 'debug', texts
 
+
     raw: (texts...) ->
         console.log.apply console, texts
+
 
     lineBreak: (text) ->
         @raw Array(80).join("*")
