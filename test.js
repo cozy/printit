@@ -79,7 +79,7 @@ describe('Check that output is proper', function() {
     var unhookIntercept = intercept(captureManyText);
     var logger = logit({
       prefix: 'my app',
-      duplicateStdout: true
+      duplicateToStdout: true
     });
 
     logger.error('fail');

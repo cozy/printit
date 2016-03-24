@@ -76,14 +76,14 @@ class Logger
 
     warn: (texts...) ->
         if process.env.DEBUG or process.env.NODE_ENV isnt 'test'
-            if @options.duplicateStdout
+            if @options.duplicateToStdout
                 console.info @format 'warn', texts
             console.warn @format 'warn', texts
 
 
     error: (texts...) ->
         if process.env.DEBUG or process.env.NODE_ENV isnt 'test'
-            if @options.duplicateStdout
+            if @options.duplicateToStdout
                 console.info @format 'error', texts
             console.error @format 'error', texts
 

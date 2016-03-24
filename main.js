@@ -102,7 +102,7 @@ Logger = (function() {
     var texts;
     texts = 1 <= arguments.length ? slice.call(arguments, 0) : [];
     if (process.env.DEBUG || process.env.NODE_ENV !== 'test') {
-      if (this.options.duplicateStdout) {
+      if (this.options.duplicateToStdout) {
         console.info(this.format('warn', texts));
       }
       return console.warn(this.format('warn', texts));
@@ -113,7 +113,7 @@ Logger = (function() {
     var texts;
     texts = 1 <= arguments.length ? slice.call(arguments, 0) : [];
     if (process.env.DEBUG || process.env.NODE_ENV !== 'test') {
-      if (this.options.duplicateStdout) {
+      if (this.options.duplicateToStdout) {
         console.info(this.format('error', texts));
       }
       return console.error(this.format('error', texts));
