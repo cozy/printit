@@ -83,7 +83,6 @@ class Logger
 
     error: (texts...) ->
         if process.env.DEBUG or process.env.NODE_ENV isnt 'test'
-            console.log(@options)
             if @options.duplicateStdout
                 console.info @format 'error', texts
             console.error @format 'error', texts
