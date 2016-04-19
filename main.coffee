@@ -1,7 +1,7 @@
 dateFormat = require './date-format'
 
-create = (options) -> new Logger options
-create.console ?= global.console
+printit = (options) -> new Logger options
+printit.console ?= global.console
 
 colors =
      blue: ['\x1B[34m', '\x1B[39m']
@@ -72,34 +72,34 @@ class Logger
 
     info: (texts...) ->
         if process.env.DEBUG or process.env.NODE_ENV isnt 'test'
-            create.console.info @format 'info', texts
+            printit.console.info @format 'info', texts
 
 
     warn: (texts...) ->
         if process.env.DEBUG or process.env.NODE_ENV isnt 'test'
             if @options.duplicateToStdout
-                create.console.info @format 'warn', texts
-            create.console.warn @format 'warn', texts
+                printit.console.info @format 'warn', texts
+            printit.console.warn @format 'warn', texts
 
 
     error: (texts...) ->
         if process.env.DEBUG or process.env.NODE_ENV isnt 'test'
             if @options.duplicateToStdout
-                create.console.info @format 'error', texts
-            create.console.error @format 'error', texts
+                printit.console.info @format 'error', texts
+            printit.console.error @format 'error', texts
 
 
     debug: (texts...) ->
         if process.env.DEBUG
-            create.console.info @format 'debug', texts
+            printit.console.info @format 'debug', texts
 
 
     raw: (texts...) ->
-        create.console.log texts...
+        printit.console.log texts...
 
 
     lineBreak: (text) ->
         @raw Array(80).join("*")
 
 
-module.exports = create
+module.exports = printit
