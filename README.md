@@ -41,3 +41,24 @@ log.error("Print this with a red error label and my app prefix");
 log.error("Test 7");
 log.error("Print this with a red error label");
 ```
+
+### Send logs to a file
+
+It is possible to use a custom `console`, for example if you want to send logs
+to a file:
+
+```javascript
+var fs = require('fs')
+var Console = require('console').Console;
+var printit = require('printit');
+
+var out = fs.createWriteStream('log.txt');
+printit.console = new Console(out, out);
+
+var log = printit({
+  prefix: 'my app',
+  date: true
+});
+
+log.info("Print this with a blue info label and my app prefix and date");
+```
